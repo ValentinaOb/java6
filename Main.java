@@ -71,6 +71,8 @@ public class Main {
         JLabel label = new JLabel("Select a CSV file:");
         JTextField textField = new JTextField(20);
         JTextField TArea = new JTextField(20);
+        JTextField RA = new JTextField(20);
+        RA.setVisible(true);
 
         panel.add(label);
         panel.add(textField);
@@ -78,6 +80,7 @@ public class Main {
 
         frame.add(panel, BorderLayout.NORTH);
         frame.add(TArea, BorderLayout.CENTER);
+        frame.add(RA, BorderLayout.SOUTH);
 
         browseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -108,16 +111,10 @@ public class Main {
 
                         int n = (int) Math.sqrt(intData.size());
 
-                        int[][] A = new int[n][n];
+                        int[][] A = new int[n + 1][n + 1];
                         for (int i = 0; i < n; i++) {
                             for (int j = 0; j < n; j++) {
                                 A[i][j] = intData.get(i * n + j);
-                            }
-                        }
-
-                        for (int i = 0; i < n; i++) {
-                            for (int j = 0; j < n; j++) {
-                                System.out.println(A[i][j]);
                             }
                         }
 
@@ -128,8 +125,8 @@ public class Main {
                         int k = 0;
                         int h = 7;
 
-                        for (int i = 0; i <= n - 1; i++)
-                            for (int j = 0; j < n; j++) {
+                        for (int i = 0; i <= h - 1; i++)
+                            for (int j = 0; j < h; j++) {
                                 if ((A[i][j] == 1) && (A[i][j + 1] == 2) && (A[i][j + 2] == 3) && (A[i][j + 3] == 3)
                                         && (A[i][j + 4] == 2) && (A[i][j + 5] == 1)) {
                                     B[k++] = i;
@@ -144,38 +141,32 @@ public class Main {
                                 }
                             }
 
+                        System.out.println("A: ");
+                        int p = 0;
+                        for (int i = 0; i < n; i++) {
+                            for (int j = 0; j < n; j++) {
+                                p++;
+                                if (p == 8) {
+                                    System.out.print("\n");
+                                    p = 1;
+                                }
+                                System.out.print(A[i][j] + " ");
+                            }
+                        }
+
+                        System.out.println("\n\nD: ");
+                        for (int i = 0; i < k; i++) {
+                            System.out.print(B[i] + " ");
+                        }
+
                         String resultT = "Array B: " + Arrays.toString(Arrays.copyOf(B, k));
-                        TArea.setText(resultT);
+                        RA.setText(resultT);
 
                     } catch (FileNotFoundException ex) {
                         TArea.setText("File not found.");
                     } catch (IOException ex) {
                         TArea.setText("Error reading the file.");
                     }
-
-                    /*
-                     * int N = 20;
-                     * int[] B = new int[N];
-                     * int k = 0;
-                     * int h = 7;
-                     * 
-                     * 
-                     * for (int i = 0; i < h; i++) {
-                     * if (isSymmetricSequence(A[i], h)) {
-                     * System.out.println("Line " + (i + 1));
-                     * B[k++] = i;
-                     * }
-                     * }
-                     * 
-                     * static boolean isSymmetricSequence(int[] line, int h) {
-                     * for (int i = 0; i < h / 2; i++) {
-                     * if (line[i] != line[h - 1 - i]) {
-                     * return false;
-                     * }
-                     * }
-                     * return true;
-                     * }
-                     */
 
                 }
             }
