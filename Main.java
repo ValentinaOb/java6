@@ -37,23 +37,17 @@ public class Main {
         Timer timer = new Timer(10, new ActionListener() {
             public int dx = 1;
             public int dy = 1;
-            public int textDx = 2;
 
             public void actionPerformed(ActionEvent e) {
                 DiagonalAnimation panel = (DiagonalAnimation) frame.getContentPane().getComponent(0);
                 panel.x += dx;
                 panel.y += dy;
-                panel.textX += textDx;
                 if (panel.x < 0 || panel.x > 350) {
                     dx = -dx;
                     panel.changeTextCaseAndFont();
                 }
                 if (panel.y < 0 || panel.y > 460) {
                     dy = -dy;
-                    panel.changeTextCaseAndFont();
-                }
-                if (panel.textX < 0 || panel.textX > 350) {
-                    textDx = -textDx;
                     panel.changeTextCaseAndFont();
                 }
                 panel.repaint();
