@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.io.*;
 
@@ -69,14 +70,14 @@ public class Main {
         JButton browseButton = new JButton("Browse");
         JLabel label = new JLabel("Select a CSV file:");
         JTextField textField = new JTextField(20);
-        JTextField resultArea = new JTextField(20);
+        JTextField TArea = new JTextField(20);
 
         panel.add(label);
         panel.add(textField);
         panel.add(browseButton);
 
         frame.add(panel, BorderLayout.NORTH);
-        frame.add(resultArea, BorderLayout.CENTER);
+        frame.add(TArea, BorderLayout.CENTER);
 
         browseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -100,7 +101,7 @@ public class Main {
                                     int a = Integer.parseInt(str);
                                     intData.add(a);
                                 } catch (NumberFormatException ex) {
-                                    resultArea.setText("Invalid data:" + str + "\n");
+                                    TArea.setText("Invalid data:" + str + "\n");
                                 }
                             }
                         }
@@ -120,7 +121,7 @@ public class Main {
                             }
                         }
 
-                        resultArea.setText("Data has been read and populated into array A.");
+                        TArea.setText("Data has been read and populated into array A.");
 
                         int N = 20;
                         int[] B = new int[N];
@@ -143,10 +144,13 @@ public class Main {
                                 }
                             }
 
+                        String resultT = "Array B: " + Arrays.toString(Arrays.copyOf(B, k));
+                        TArea.setText(resultT);
+
                     } catch (FileNotFoundException ex) {
-                        resultArea.setText("File not found.");
+                        TArea.setText("File not found.");
                     } catch (IOException ex) {
-                        resultArea.setText("Error reading the file.");
+                        TArea.setText("Error reading the file.");
                     }
 
                     /*
